@@ -1,6 +1,5 @@
 openapi: 3.1.0
 info:
-  # Do not change the title, if the title changes, the import paths will be broken
   title: Api
   version: 0.1.0
   description: API specification
@@ -12,13 +11,16 @@ tags:
     description: Health operations
   - name: openai
     description: OpenAI AI chat operations
+  - name: leads
+    description: Lead management
+  - name: admin
+    description: Admin analytics
 paths:
   /healthz:
     get:
       operationId: healthCheck
       tags: [health]
       summary: Health check
-      description: Returns server health status
       responses:
         "200":
           description: Healthy
@@ -26,6 +28,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+
   /openai/conversations:
     get:
       operationId: listOpenaiConversations
@@ -57,6 +60,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/OpenaiConversation"
+
   /openai/conversations/{id}:
     get:
       operationId: getOpenaiConversation
@@ -100,6 +104,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/OpenaiError"
+
   /openai/conversations/{id}/messages:
     get:
       operationId: listOpenaiMessages
@@ -141,6 +146,96 @@ paths:
           description: SSE stream of assistant text chunks
           content:
             text/event-stream: {}
+
+  /leads:
+    get:
+      operationId: listLeads
+      tags: [leads]
+      summary: List all leads
+      responses:
+        "200":
+          description: List of leads
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Lead"
+    post:
+      operationId: createLead
+      tags: [leads]
+      summary: Create a new lead from contact form
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateLeadBody"
+      responses:
+        "201":
+          description: Created lead
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Lead"
+
+  /leads/{id}:
+    patch:
+      operationId: updateLeadStatus
+      tags: [leads]
+      summary: Update lead status
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateLeadStatusBody"
+      responses:
+        "200":
+          description: Updated lead
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Lead"
+
+  /admin/stats:
+    get:
+      operationId: getAdminStats
+      tags: [admin]
+      summary: Get admin dashboard statistics
+      responses:
+        "200":
+          description: Dashboard stats
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AdminStats"
+
+  /admin/track-visit:
+    post:
+      operationId: trackVisit
+      tags: [admin]
+      summary: Track a page visit
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TrackVisitBody"
+      responses:
+        "200":
+          description: Visit tracked
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TrackVisitResponse"
+
 components:
   schemas:
     HealthStatus:
@@ -150,6 +245,7 @@ components:
           type: string
       required:
         - status
+
     OpenaiConversation:
       type: object
       properties:
@@ -164,6 +260,7 @@ components:
         - id
         - title
         - createdAt
+
     OpenaiMessage:
       type: object
       properties:
@@ -184,6 +281,7 @@ components:
         - role
         - content
         - createdAt
+
     CreateOpenaiConversationBody:
       type: object
       properties:
@@ -191,6 +289,7 @@ components:
           type: string
       required:
         - title
+
     SendOpenaiMessageBody:
       type: object
       properties:
@@ -198,6 +297,7 @@ components:
           type: string
       required:
         - content
+
     OpenaiConversationWithMessages:
       type: object
       properties:
@@ -217,6 +317,7 @@ components:
         - title
         - createdAt
         - messages
+
     OpenaiError:
       type: object
       properties:
@@ -224,3 +325,140 @@ components:
           type: string
       required:
         - error
+
+    Lead:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        service:
+          type: string
+        message:
+          type: string
+        status:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - name
+        - phone
+        - status
+        - createdAt
+
+    CreateLeadBody:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        service:
+          type: string
+        message:
+          type: string
+      required:
+        - name
+        - phone
+
+    UpdateLeadStatusBody:
+      type: object
+      properties:
+        status:
+          type: string
+      required:
+        - status
+
+    AdminStats:
+      type: object
+      properties:
+        totalLeads:
+          type: integer
+        newLeadsToday:
+          type: integer
+        totalVisits:
+          type: integer
+        visitsToday:
+          type: integer
+        totalConversations:
+          type: integer
+        conversionRate:
+          type: number
+        leadsByService:
+          type: array
+          items:
+            type: object
+            properties:
+              service:
+                type: string
+              count:
+                type: integer
+            required:
+              - service
+              - count
+        leadsByStatus:
+          type: array
+          items:
+            type: object
+            properties:
+              status:
+                type: string
+              count:
+                type: integer
+            required:
+              - status
+              - count
+        recentLeads:
+          type: array
+          items:
+            $ref: "#/components/schemas/Lead"
+        visitsLast7Days:
+          type: array
+          items:
+            type: object
+            properties:
+              date:
+                type: string
+              count:
+                type: integer
+            required:
+              - date
+              - count
+      required:
+        - totalLeads
+        - newLeadsToday
+        - totalVisits
+        - visitsToday
+        - totalConversations
+        - conversionRate
+        - leadsByService
+        - leadsByStatus
+        - recentLeads
+        - visitsLast7Days
+
+    TrackVisitBody:
+      type: object
+      properties:
+        page:
+          type: string
+        referrer:
+          type: string
+      required:
+        - page
+
+    TrackVisitResponse:
+      type: object
+      properties:
+        ok:
+          type: boolean
+      required:
+        - ok

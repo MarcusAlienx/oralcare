@@ -41,3 +41,63 @@ export interface OpenaiConversationWithMessages {
 export interface OpenaiError {
   error: string;
 }
+
+export interface Lead {
+  id: number;
+  name: string;
+  email?: string;
+  phone: string;
+  service?: string;
+  message?: string;
+  status: string;
+  createdAt: string;
+}
+
+export interface CreateLeadBody {
+  name: string;
+  email?: string;
+  phone: string;
+  service?: string;
+  message?: string;
+}
+
+export interface UpdateLeadStatusBody {
+  status: string;
+}
+
+export type AdminStatsLeadsByServiceItem = {
+  service: string;
+  count: number;
+};
+
+export type AdminStatsLeadsByStatusItem = {
+  status: string;
+  count: number;
+};
+
+export type AdminStatsVisitsLast7DaysItem = {
+  date: string;
+  count: number;
+};
+
+export interface AdminStats {
+  totalLeads: number;
+  newLeadsToday: number;
+  totalVisits: number;
+  visitsToday: number;
+  totalConversations: number;
+  conversionRate: number;
+  leadsByService: AdminStatsLeadsByServiceItem[];
+  leadsByStatus: AdminStatsLeadsByStatusItem[];
+  recentLeads: Lead[];
+  visitsLast7Days: AdminStatsVisitsLast7DaysItem[];
+}
+
+export interface TrackVisitBody {
+  page: string;
+  referrer?: string;
+}
+
+export interface TrackVisitResponse {
+  ok: boolean;
+}

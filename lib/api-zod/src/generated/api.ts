@@ -8,7 +8,6 @@
 import * as zod from "zod";
 
 /**
- * Returns server health status
  * @summary Health check
  */
 export const HealthCheckResponse = zod.object({
@@ -90,4 +89,106 @@ export const SendOpenaiMessageParams = zod.object({
 
 export const SendOpenaiMessageBody = zod.object({
   content: zod.string(),
+});
+
+/**
+ * @summary List all leads
+ */
+export const ListLeadsResponseItem = zod.object({
+  id: zod.number(),
+  name: zod.string(),
+  email: zod.string().optional(),
+  phone: zod.string(),
+  service: zod.string().optional(),
+  message: zod.string().optional(),
+  status: zod.string(),
+  createdAt: zod.coerce.date(),
+});
+export const ListLeadsResponse = zod.array(ListLeadsResponseItem);
+
+/**
+ * @summary Create a new lead from contact form
+ */
+export const CreateLeadBody = zod.object({
+  name: zod.string(),
+  email: zod.string().optional(),
+  phone: zod.string(),
+  service: zod.string().optional(),
+  message: zod.string().optional(),
+});
+
+/**
+ * @summary Update lead status
+ */
+export const UpdateLeadStatusParams = zod.object({
+  id: zod.coerce.number(),
+});
+
+export const UpdateLeadStatusBody = zod.object({
+  status: zod.string(),
+});
+
+export const UpdateLeadStatusResponse = zod.object({
+  id: zod.number(),
+  name: zod.string(),
+  email: zod.string().optional(),
+  phone: zod.string(),
+  service: zod.string().optional(),
+  message: zod.string().optional(),
+  status: zod.string(),
+  createdAt: zod.coerce.date(),
+});
+
+/**
+ * @summary Get admin dashboard statistics
+ */
+export const GetAdminStatsResponse = zod.object({
+  totalLeads: zod.number(),
+  newLeadsToday: zod.number(),
+  totalVisits: zod.number(),
+  visitsToday: zod.number(),
+  totalConversations: zod.number(),
+  conversionRate: zod.number(),
+  leadsByService: zod.array(
+    zod.object({
+      service: zod.string(),
+      count: zod.number(),
+    }),
+  ),
+  leadsByStatus: zod.array(
+    zod.object({
+      status: zod.string(),
+      count: zod.number(),
+    }),
+  ),
+  recentLeads: zod.array(
+    zod.object({
+      id: zod.number(),
+      name: zod.string(),
+      email: zod.string().optional(),
+      phone: zod.string(),
+      service: zod.string().optional(),
+      message: zod.string().optional(),
+      status: zod.string(),
+      createdAt: zod.coerce.date(),
+    }),
+  ),
+  visitsLast7Days: zod.array(
+    zod.object({
+      date: zod.string(),
+      count: zod.number(),
+    }),
+  ),
+});
+
+/**
+ * @summary Track a page visit
+ */
+export const TrackVisitBody = zod.object({
+  page: zod.string(),
+  referrer: zod.string().optional(),
+});
+
+export const TrackVisitResponse = zod.object({
+  ok: zod.boolean(),
 });

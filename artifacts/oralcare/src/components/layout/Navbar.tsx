@@ -45,10 +45,10 @@ export function Navbar() {
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex items-center justify-between">
           <Link href="/" className="flex flex-col">
-            <span className={`font-serif font-bold text-2xl tracking-tight transition-colors ${isScrolled ? "text-primary" : "text-primary md:text-white"}`}>
+            <span className="font-serif font-bold text-2xl tracking-tight transition-colors text-slate-900">
               A&E ORALCARE
             </span>
-            <span className={`text-[0.65rem] tracking-wider uppercase font-medium transition-colors ${isScrolled ? "text-slate-500" : "text-slate-500 md:text-white/80"}`}>
+            <span className="text-[0.65rem] tracking-wider uppercase font-medium transition-colors text-slate-600">
               Centro de Odontología Especializada
             </span>
           </Link>
@@ -61,9 +61,7 @@ export function Navbar() {
                   key={link.name}
                   href={link.href}
                   onClick={(e) => scrollToSection(e, link.href)}
-                  className={`text-sm font-medium transition-colors hover:text-primary ${
-                    isScrolled ? "text-slate-700" : "text-white/90"
-                  }`}
+                  className="text-sm font-medium transition-colors text-slate-800 hover:text-primary"
                 >
                   {link.name}
                 </a>
@@ -73,15 +71,16 @@ export function Navbar() {
               <a 
                 href="tel:+523339153838" 
                 className={`flex items-center gap-2 text-sm font-semibold transition-colors hover:text-primary ${
-                  isScrolled ? "text-slate-800" : "text-white"
+                  isScrolled ? "text-slate-800" : "text-slate-800"
                 }`}
               >
                 <Phone className="w-4 h-4" />
                 <span>33 3915.3838</span>
               </a>
-              <Button asChild variant={isScrolled ? "default" : "secondary"} className={!isScrolled ? "bg-white text-primary hover:bg-white/90" : ""}>
+              <Button asChild variant="default" className="relative overflow-hidden group">
                 <a href="#contacto" onClick={(e) => scrollToSection(e, "#contacto")}>
-                  Agendar Cita
+                  <span className="relative z-10">Agendar Cita</span>
+                  <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/30 to-transparent group-hover:animate-[shimmer_1.5s_infinite]" />
                 </a>
               </Button>
             </div>
