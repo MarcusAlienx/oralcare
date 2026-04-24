@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "A&E OralCare - Centro de Odontología Especializada"
+version = "1.0.0"
+id = "artifacts/oralcare"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 25927
+
+[services.development]
+run = "pnpm --filter @workspace/oralcare run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/oralcare", "run", "build" ]
+publicDir = "artifacts/oralcare/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "25927"
+BASE_PATH = "/"

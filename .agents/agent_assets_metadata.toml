@@ -1,0 +1,61 @@
+uploads = []
+
+[[generated]]
+id = "0FEnRSKxwnvrcgYiGBuvc"
+uri = "file://artifacts/oralcare/public/images/hero.png"
+type = "image"
+title = "Dental clinic hero interior"
+
+[[generated]]
+id = "7Hun367k_HA54Dr607nl8"
+uri = "file://artifacts/oralcare/public/images/about.png"
+type = "image"
+title = "Dentist examining patient"
+
+[[generated]]
+id = "LU2a2C31CBxbMjLmZbPSu"
+uri = "file://artifacts/oralcare/public/images/service-implants.png"
+type = "image"
+title = "Dental implant model"
+
+[[generated]]
+id = "rx7N1VhlR7m3q-0268wG6"
+uri = "file://artifacts/oralcare/public/images/service-ortho.png"
+type = "image"
+title = "Clear aligners"
+
+[[generated]]
+id = "SO5O_cKvAq2fjYRfqWRZu"
+uri = "file://artifacts/oralcare/public/images/service-whitening.png"
+type = "image"
+title = "Bright white smile"
+
+[[outputs]]
+id = "QMvYenyul-uSfZg-RBe2P"
+uri = "file://artifacts/oralcare/public/images/team-1.jpg"
+type = "image"
+title = "Professional male dentist portrait, clean white coat, smiling, modern clinic background"
+
+[[outputs]]
+id = "GMKXAdh8diIV2u0dDHgj7"
+uri = "file://artifacts/oralcare/public/images/team-2.jpg"
+type = "image"
+title = "Professional female dentist portrait, clean white coat, smiling, modern clinic background"
+
+[[outputs]]
+id = "VuiUsgCqvjXEa5sHz_E7B"
+uri = "file://artifacts/oralcare/public/images/patient_1.jpg"
+type = "image"
+title = "Happy patient portrait smiling showing perfect teeth"
+
+[[outputs]]
+id = "FYAYJ-RzV2YcLhhpd5hUk"
+uri = "file://artifacts/oralcare/public/images/patient_2.jpg"
+type = "image"
+title = "Happy patient portrait smiling showing perfect teeth"
+
+[[outputs]]
+id = "wbqbFN-pnHwc_ka7BH4vW"
+uri = "file://artifacts/oralcare/public/images/patient_3.jpg"
+type = "image"
+title = "Happy patient portrait smiling showing perfect teeth"
