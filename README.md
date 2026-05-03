@@ -713,12 +713,11 @@ Todos los componentes viven en `src/components/ui/` y están configurados en `co
 9. Server guarda el mensaje completo del asistente en la DB
 ```
 
-### Variables de entorno de OpenAI
+### Variables de entorno de Gemini (Google GenAI)
 
-Provistas automáticamente por Replit AI Integrations:
+Deben proveerse vía entorno para inicializar el cliente:
 ```
-AI_INTEGRATIONS_OPENAI_BASE_URL=https://...replit.app/...
-AI_INTEGRATIONS_OPENAI_API_KEY=...
+GEMINI_API_KEY=AIzaSy...
 ```
 
 Se usan en `lib/integrations-openai-ai-server/src/client.ts`.
@@ -747,21 +746,19 @@ Para proteger `/admin`, se puede implementar un middleware simple en el backend 
 
 | Variable | Requerida | Descripción |
 |----------|-----------|-------------|
-| `DATABASE_URL` | Sí | Connection string PostgreSQL (Replit managed) |
+| `DATABASE_URL` | Sí | Connection string PostgreSQL |
 | `SESSION_SECRET` | Sí | Secret para sesiones Express |
-| `PORT` | Sí | Puerto del servidor (asignado por Replit) |
-| `AI_INTEGRATIONS_OPENAI_BASE_URL` | Sí | Base URL proxy OpenAI de Replit |
-| `AI_INTEGRATIONS_OPENAI_API_KEY` | Sí | API key proxy OpenAI de Replit |
+| `PORT` | Sí | Puerto del servidor |
+| `GEMINI_API_KEY` | Sí | API key para Google Gemini |
 | `NODE_ENV` | Automática | "development" o "production" |
 
-**Para desarrollo local fuera de Replit:**
+**Para desarrollo local:**
 ```bash
 # .env (en artifacts/api-server/)
 DATABASE_URL=postgresql://user:password@localhost:5432/oralcare
 SESSION_SECRET=un_secreto_largo_y_seguro
 PORT=8080
-AI_INTEGRATIONS_OPENAI_BASE_URL=https://api.openai.com/v1
-AI_INTEGRATIONS_OPENAI_API_KEY=sk-tu-api-key-real
+GEMINI_API_KEY=AIzaSy...
 ```
 
 ---

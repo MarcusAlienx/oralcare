@@ -1,0 +1,29 @@
+FROM node:22-alpine AS base
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN corepack enable
+
+FROM base AS builder
+WORKDIR /app
+COPY . .
+# Instalar dependencias usando pnpm
+RUN pnpm install --frozen-lockfile
+
+# Construir el backend y sus dependencias internas
+RUN pnpm --filter "@workspace/api-server..." run build
+# Extraer un entorno standalone usando deploy para resolver problemas con symlinks en monorepos
+RUN pnpm deploy --filter @workspace/api-server --prod /prod/api-server
+
+FROM base AS runner
+WORKDIR /app
+
+ENV NODE_ENV=production
+ENV PORT=8080
+
+# Copiar el paquete aislado con node_modules limpios
+COPY --from=builder /prod/api-server /app/
+
+# Exponer el puerto
+EXPOSE 8080
+
+CMD ["node", "--enable-source-maps", "dist/index.mjs"]
