@@ -24,7 +24,7 @@ export function ChatWidget() {
   
   // Load history if we have an ID
   const { data: history } = useListOpenaiMessages(conversationId || 0, {
-    query: { enabled: !!conversationId }
+    query: { enabled: !!conversationId, queryKey: ['messages', conversationId] }
   });
 
   useEffect(() => {

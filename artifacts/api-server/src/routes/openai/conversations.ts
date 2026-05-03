@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { db } from "@workspace/db";
 import { conversations, messages } from "@workspace/db";
-import { openai } from "@workspace/integrations-openai-ai-server";
+import { gemini } from "@workspace/integrations-openai-ai-server";
 import { eq } from "drizzle-orm";
 import {
   CreateOpenaiConversationBody,
@@ -132,17 +132,15 @@ router.post("/conversations/:id/messages", async (req, res) => {
       .orderBy(messages.createdAt);
 
     const chatMessages = previousMessages.map((m) => ({
-      role: m.role as "user" | "assistant" | "system",
-      content: m.content,
+      role: m.role === "assistant" ? "model" : "user",
+      parts: [{ text: m.content }],
     }));
 
     res.setHeader("Content-Type", "text/event-stream");
     res.setHeader("Cache-Control", "no-cache");
     res.setHeader("Connection", "keep-alive");
 
-    const systemMessage = {
-      role: "system" as const,
-      content: `Eres la asistente dental de A&E OralCare en Zapopan, Guadalajara. Eres directa, cálida y eficiente — tu objetivo es agendar citas.
+    const systemInstruction = `Eres la asistente dental de A&E OralCare en Zapopan, Guadalajara. Eres directa, cálida y eficiente — tu objetivo es agendar citas.
 
 REGLAS:
 - Respuestas máximo 2-3 oraciones. Sin listas largas.
@@ -152,19 +150,24 @@ REGLAS:
 
 SERVICIOS: Ortodoncia (brackets/Invisalign), Implantes, Endodoncia, Carillas, Blanqueamiento, Odontopediatría, Rehabilitación Oral.
 HORARIO: Lun-Vie 9-19h, Sáb 9-14h.
-UBICACIÓN: Av. Guadalupe 5787, Zapopan.`,
-    };
+UBICACIÓN: Av. Guadalupe 5787, Zapopan.`;
 
     let fullResponse = "";
-    const stream = await openai.chat.completions.create({
-      model: "gpt-5-mini",
-      max_completion_tokens: 1024,
-      messages: [systemMessage, ...chatMessages],
-      stream: true,
+    const chat = gemini.chats.create({
+      model: 'gemini-2.5-flash',
+      config: {
+        systemInstruction,
+        temperature: 0.7,
+      },
+      history: chatMessages.slice(0, -1) // All except the newly added user message
+    });
+
+    const stream = await chat.sendMessageStream({
+      message: body.content
     });
 
     for await (const chunk of stream) {
-      const content = chunk.choices[0]?.delta?.content;
+      const content = chunk.text;
       if (content) {
         fullResponse += content;
         res.write(`data: ${JSON.stringify({ content })}\n\n`);
