@@ -1,0 +1,44 @@
+# Speckit Constitution
+
+## Purpose
+This document establishes the development principles for the OralCare repository, emphasizing code quality, testing standards, user experience consistency, and performance requirements.
+
+## Principles
+
+### 1. Code Quality
+- Use clear, expressive naming for variables, functions, and components.
+- Keep functions and components small, single-purpose, and easy to reason about.
+- Prefer immutability and pure functions where possible.
+- Enforce consistent formatting and linting across the entire repository.
+- Avoid duplication by extracting shared logic and UI patterns into reusable modules.
+- Use TypeScript with strict typings to make intent explicit and reduce runtime errors.
+- Document non-obvious behavior with concise comments, but avoid commenting what the code already expresses.
+
+### 2. Testing Standards
+- Write automated tests for all business-critical logic, data transformations, and edge cases.
+- Prefer unit tests for pure logic and integration tests for API, database, and edge function behavior.
+- Validate user-facing flows with component/UI tests where the app behavior matters.
+- Ensure tests are deterministic, fast, and isolated from external dependencies when possible.
+- Keep test code readable and maintainable with clear setup, execution, and assertion phases.
+- Use coverage as guidance, not a target; quality is more important than a specific percentage.
+
+### 3. User Experience Consistency
+- Maintain consistent visual and interaction patterns throughout the app.
+- Use shared UI components and design tokens for spacing, typography, color, and motion.
+- Keep user flows predictable, accessible, and easy to scan.
+- Provide clear feedback for all user actions: loading, success, validation errors, and failures.
+- Design forms and conversational interfaces with concise prompts and helpful affordances.
+- Ensure warning, error, and helper messaging is consistent in tone and purpose.
+
+### 4. Performance Requirements
+- Prioritize fast startup, page load, and interaction responsiveness.
+- Avoid shipping unnecessary code, dependencies, and assets to production builds.
+- Use caching and memoization wisely to reduce repeated work in UI and data fetching.
+- Optimize network requests: batch where appropriate, avoid redundant calls, and handle errors gracefully.
+- Measure and fix performance regressions rather than relying on assumptions.
+- Keep the bundle size reasonable for the target deployment environment.
+
+## Implementation Guidelines
+- Treat this constitution as an actionable checklist during code reviews.
+- If a proposed change conflicts with these principles, favor the option that improves long-term maintainability and user satisfaction.
+- Update this document when the team adopts new practices or when the product requirements evolve.
