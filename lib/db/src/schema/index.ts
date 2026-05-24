@@ -4,3 +4,7 @@ export * from "./leads";
 export * from "./pageVisits";
 export * from "./patients";
 export * from "./appointments";
+export * from "./pacientes";
+export * from "./leadsTurismo";
+export * from "./doctores";
+export * from "./citas";
