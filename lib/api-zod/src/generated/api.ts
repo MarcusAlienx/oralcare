@@ -5,190 +5,190 @@
  * API specification
  * OpenAPI spec version: 0.1.0
  */
-import * as zod from "zod";
+import * as zod from 'zod';
+
 
 /**
  * @summary Health check
  */
 export const HealthCheckResponse = zod.object({
-  status: zod.string(),
-});
+  "status": zod.string()
+})
+
 
 /**
  * @summary List all conversations
  */
-export const ListOpenaiConversationsResponseItem = zod.object({
-  id: zod.number(),
-  title: zod.string(),
-  createdAt: zod.coerce.date(),
-});
-export const ListOpenaiConversationsResponse = zod.array(
-  ListOpenaiConversationsResponseItem,
-);
+export const ListGeminiConversationsResponseItem = zod.object({
+  "id": zod.number(),
+  "title": zod.string(),
+  "createdAt": zod.string().datetime({})
+})
+export const ListGeminiConversationsResponse = zod.array(ListGeminiConversationsResponseItem)
+
 
 /**
  * @summary Create a new conversation
  */
-export const CreateOpenaiConversationBody = zod.object({
-  title: zod.string(),
-});
+export const CreateGeminiConversationBody = zod.object({
+  "title": zod.string()
+})
+
 
 /**
  * @summary Get conversation with messages
  */
-export const GetOpenaiConversationParams = zod.object({
-  id: zod.coerce.number(),
-});
+export const GetGeminiConversationParams = zod.object({
+  "id": zod.number()
+})
 
-export const GetOpenaiConversationResponse = zod.object({
-  id: zod.number(),
-  title: zod.string(),
-  createdAt: zod.coerce.date(),
-  messages: zod.array(
-    zod.object({
-      id: zod.number(),
-      conversationId: zod.number(),
-      role: zod.string(),
-      content: zod.string(),
-      createdAt: zod.coerce.date(),
-    }),
-  ),
-});
+export const GetGeminiConversationResponse = zod.object({
+  "id": zod.number(),
+  "title": zod.string(),
+  "createdAt": zod.string().datetime({}),
+  "messages": zod.array(zod.object({
+  "id": zod.number(),
+  "conversationId": zod.number(),
+  "role": zod.string(),
+  "content": zod.string(),
+  "createdAt": zod.string().datetime({})
+}))
+})
+
 
 /**
  * @summary Delete a conversation
  */
-export const DeleteOpenaiConversationParams = zod.object({
-  id: zod.coerce.number(),
-});
+export const DeleteGeminiConversationParams = zod.object({
+  "id": zod.number()
+})
+
 
 /**
  * @summary List messages in a conversation
  */
-export const ListOpenaiMessagesParams = zod.object({
-  id: zod.coerce.number(),
-});
+export const ListGeminiMessagesParams = zod.object({
+  "id": zod.number()
+})
 
-export const ListOpenaiMessagesResponseItem = zod.object({
-  id: zod.number(),
-  conversationId: zod.number(),
-  role: zod.string(),
-  content: zod.string(),
-  createdAt: zod.coerce.date(),
-});
-export const ListOpenaiMessagesResponse = zod.array(
-  ListOpenaiMessagesResponseItem,
-);
+export const ListGeminiMessagesResponseItem = zod.object({
+  "id": zod.number(),
+  "conversationId": zod.number(),
+  "role": zod.string(),
+  "content": zod.string(),
+  "createdAt": zod.string().datetime({})
+})
+export const ListGeminiMessagesResponse = zod.array(ListGeminiMessagesResponseItem)
+
 
 /**
  * @summary Send a text message and receive a streaming text response
  */
-export const SendOpenaiMessageParams = zod.object({
-  id: zod.coerce.number(),
-});
+export const SendGeminiMessageParams = zod.object({
+  "id": zod.number()
+})
 
-export const SendOpenaiMessageBody = zod.object({
-  content: zod.string(),
-});
+export const SendGeminiMessageBody = zod.object({
+  "content": zod.string()
+})
+
 
 /**
  * @summary List all leads
  */
 export const ListLeadsResponseItem = zod.object({
-  id: zod.number(),
-  name: zod.string(),
-  email: zod.string().optional(),
-  phone: zod.string(),
-  service: zod.string().optional(),
-  message: zod.string().optional(),
-  status: zod.string(),
-  createdAt: zod.coerce.date(),
-});
-export const ListLeadsResponse = zod.array(ListLeadsResponseItem);
+  "id": zod.number(),
+  "name": zod.string(),
+  "email": zod.string().optional(),
+  "phone": zod.string(),
+  "service": zod.string().optional(),
+  "message": zod.string().optional(),
+  "status": zod.string(),
+  "createdAt": zod.string().datetime({})
+})
+export const ListLeadsResponse = zod.array(ListLeadsResponseItem)
+
 
 /**
  * @summary Create a new lead from contact form
  */
 export const CreateLeadBody = zod.object({
-  name: zod.string(),
-  email: zod.string().optional(),
-  phone: zod.string(),
-  service: zod.string().optional(),
-  message: zod.string().optional(),
-});
+  "name": zod.string(),
+  "email": zod.string().optional(),
+  "phone": zod.string(),
+  "service": zod.string().optional(),
+  "message": zod.string().optional()
+})
+
 
 /**
  * @summary Update lead status
  */
 export const UpdateLeadStatusParams = zod.object({
-  id: zod.coerce.number(),
-});
+  "id": zod.number()
+})
 
 export const UpdateLeadStatusBody = zod.object({
-  status: zod.string(),
-});
+  "status": zod.string()
+})
 
 export const UpdateLeadStatusResponse = zod.object({
-  id: zod.number(),
-  name: zod.string(),
-  email: zod.string().optional(),
-  phone: zod.string(),
-  service: zod.string().optional(),
-  message: zod.string().optional(),
-  status: zod.string(),
-  createdAt: zod.coerce.date(),
-});
+  "id": zod.number(),
+  "name": zod.string(),
+  "email": zod.string().optional(),
+  "phone": zod.string(),
+  "service": zod.string().optional(),
+  "message": zod.string().optional(),
+  "status": zod.string(),
+  "createdAt": zod.string().datetime({})
+})
+
 
 /**
  * @summary Get admin dashboard statistics
  */
 export const GetAdminStatsResponse = zod.object({
-  totalLeads: zod.number(),
-  newLeadsToday: zod.number(),
-  totalVisits: zod.number(),
-  visitsToday: zod.number(),
-  totalConversations: zod.number(),
-  conversionRate: zod.number(),
-  leadsByService: zod.array(
-    zod.object({
-      service: zod.string(),
-      count: zod.number(),
-    }),
-  ),
-  leadsByStatus: zod.array(
-    zod.object({
-      status: zod.string(),
-      count: zod.number(),
-    }),
-  ),
-  recentLeads: zod.array(
-    zod.object({
-      id: zod.number(),
-      name: zod.string(),
-      email: zod.string().optional(),
-      phone: zod.string(),
-      service: zod.string().optional(),
-      message: zod.string().optional(),
-      status: zod.string(),
-      createdAt: zod.coerce.date(),
-    }),
-  ),
-  visitsLast7Days: zod.array(
-    zod.object({
-      date: zod.string(),
-      count: zod.number(),
-    }),
-  ),
-});
+  "totalLeads": zod.number(),
+  "newLeadsToday": zod.number(),
+  "totalVisits": zod.number(),
+  "visitsToday": zod.number(),
+  "totalConversations": zod.number(),
+  "conversionRate": zod.number(),
+  "leadsByService": zod.array(zod.object({
+  "service": zod.string(),
+  "count": zod.number()
+})),
+  "leadsByStatus": zod.array(zod.object({
+  "status": zod.string(),
+  "count": zod.number()
+})),
+  "recentLeads": zod.array(zod.object({
+  "id": zod.number(),
+  "name": zod.string(),
+  "email": zod.string().optional(),
+  "phone": zod.string(),
+  "service": zod.string().optional(),
+  "message": zod.string().optional(),
+  "status": zod.string(),
+  "createdAt": zod.string().datetime({})
+})),
+  "visitsLast7Days": zod.array(zod.object({
+  "date": zod.string(),
+  "count": zod.number()
+}))
+})
+
 
 /**
  * @summary Track a page visit
  */
 export const TrackVisitBody = zod.object({
-  page: zod.string(),
-  referrer: zod.string().optional(),
-});
+  "page": zod.string(),
+  "referrer": zod.string().optional()
+})
 
 export const TrackVisitResponse = zod.object({
-  ok: zod.boolean(),
-});
+  "ok": zod.boolean()
+})
+
+

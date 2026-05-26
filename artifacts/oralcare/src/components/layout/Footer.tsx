@@ -1,6 +1,9 @@
+import { useLocale } from "@/lib/locale";
 import { Phone, Mail, MapPin, Facebook, Instagram, Twitter } from "lucide-react";
 
 export function Footer() {
+  const { t } = useLocale();
+
   return (
     <footer className="bg-slate-950 text-slate-300 py-16 lg:py-24">
       <div className="container mx-auto px-4 md:px-6">
@@ -32,19 +35,18 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="text-white font-semibold text-lg mb-6 font-serif">Servicios</h4>
+            <h4 className="text-white font-semibold text-lg mb-6 font-serif">{t("footer.services")}</h4>
             <ul className="space-y-3 text-sm">
-              <li><a href="#servicios" className="hover:text-primary transition-colors">Ortodoncia</a></li>
               <li><a href="#servicios" className="hover:text-primary transition-colors">Implantes Dentales</a></li>
-              <li><a href="#servicios" className="hover:text-primary transition-colors">Endodoncia</a></li>
               <li><a href="#servicios" className="hover:text-primary transition-colors">Diseño de Sonrisa</a></li>
-              <li><a href="#servicios" className="hover:text-primary transition-colors">Odontopediatría</a></li>
-              <li><a href="#servicios" className="hover:text-primary transition-colors">Blanqueamiento</a></li>
+              <li><a href="#servicios" className="hover:text-primary transition-colors">Odontología Holística</a></li>
+              <li><a href="#servicios" className="hover:text-primary transition-colors">Carillas de Porcelana</a></li>
+              <li><a href="#servicios" className="hover:text-primary transition-colors">Rehabilitación Oral</a></li>
             </ul>
           </div>
 
           <div>
-            <h4 className="text-white font-semibold text-lg mb-6 font-serif">Horarios</h4>
+            <h4 className="text-white font-semibold text-lg mb-6 font-serif">{t("footer.hours")}</h4>
             <ul className="space-y-3 text-sm">
               <li className="flex justify-between border-b border-slate-800 pb-2">
                 <span>Lunes - Viernes</span>

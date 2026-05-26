@@ -23,3 +23,6 @@ app.listen(port, (err) => {
 
   logger.info({ port }, "Server listening");
 });
+
+import { connectToWhatsApp } from "./services/whatsappService.js";
+connectToWhatsApp().catch(err => logger.error({ err }, "WhatsApp connection failed"));

@@ -65,3 +65,29 @@ id = "t7VsNZ2sB416fWCwqznjA"
 uri = "file://README.md"
 type = "text"
 title = "README.md — Documentación completa del proyecto A&E OralCare"
+
+[[skills]]
+id = "insforge"
+path = ".agents/skills/insforge"
+description = "Core InsForge app development skill"
+
+[[skills]]
+id = "insforge-cli"
+path = ".agents/skills/insforge-cli"
+description = "InsForge infrastructure and CLI management"
+
+[[skills]]
+id = "insforge-debug"
+path = ".agents/skills/insforge-debug"
+description = "Diagnostics and auditing for InsForge projects"
+
+[[skills]]
+id = "insforge-integrations"
+path = ".agents/skills/insforge-integrations"
+description = "External auth and payment integrations"
+
+[[outputs]]
+id = "api-schema"
+uri = "file://lib/api-spec/openapi.yaml"
+type = "text"
+title = "API Specification (OpenAPI 3.1)"
