@@ -23,3 +23,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 - Data persistence mechanisms assume strict backend-level authentication for bot mutations, utilizing explicit `INSFORGE_ANON_KEY` or JWT tokens per the platform's security framework.
+
+### Deployment Notes
+- **InsForge Deployment Challenges**: Encountered persistent issues with the `npx @insforge/cli deployments deploy` command, specifically `Error: Command "npm install" exited with 1` and `Error: Invalid token`, despite thorough local dependency management and explicit API key provision. This suggests a potential interaction issue with the InsForge CLI within the workspace environment, which could not be resolved from code modifications alone.
