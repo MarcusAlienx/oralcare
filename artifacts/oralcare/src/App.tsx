@@ -6,6 +6,7 @@ import { Helmet, HelmetProvider } from "react-helmet-async";
 import { setAuthTokenGetter } from "@workspace/api-client-react";
 import { useEffect } from "react";
 import Home from "@/pages/home";
+import Turismo from "@/pages/turismo";
 import Admin from "@/pages/admin";
 import NotFound from "@/pages/not-found";
 import { LocaleProvider, useLocale } from "@/lib/locale";
@@ -16,6 +17,7 @@ function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
+      <Route path="/turismo" component={Turismo} />
       <Route path="/admin" component={Admin} />
       <Route component={NotFound} />
     </Switch>

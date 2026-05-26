@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { useCreateOpenaiConversation, useListOpenaiMessages } from "@workspace/api-client-react";
+import { useCreateGeminiConversation, useListGeminiMessages } from "@workspace/api-client-react";
 
 type Message = {
   id: string;
@@ -20,12 +20,12 @@ export function ChatWidget() {
   const [isTyping, setIsTyping] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  const createConv = useCreateOpenaiConversation();
+  const createConv = useCreateGeminiConversation();
   
   // Load history if we have an ID
-  const { data: history } = useListOpenaiMessages(conversationId || 0, {
+  const { data: history } = useListGeminiMessages(conversationId || 0, {
     query: {
-      queryKey: ["openaiMessages", conversationId],
+      queryKey: ["geminiMessages", conversationId],
       enabled: !!conversationId,
     },
   });
@@ -80,7 +80,7 @@ export function ChatWidget() {
     setIsTyping(true);
 
     try {
-      const response = await fetch(`/api/openai/conversations/${conversationId}/messages`, {
+      const response = await fetch(`/api/gemini/conversations/${conversationId}/messages`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ content: userMessage }),

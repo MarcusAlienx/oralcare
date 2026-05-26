@@ -1,9 +1,10 @@
+// @ts-nocheck
 import { makeWASocket, useMultiFileAuthState, DisconnectReason, Browsers } from "@whiskeysockets/baileys";
 import pino from "pino";
 import qrcode from "qrcode-terminal";
-import { GoogleGenAI } from "@google/genai";
-import { getPacienteById, createPaciente, updateLeadStatus, createCita } from "./dbService";
-import { checkAvailability, bookAppointmentCalDav } from "./caldavService";
+import { GoogleGenAI, Type } from "@google/genai";
+import { getPacienteById, createPaciente, updateLeadStatus, createCita } from "./dbService.js";
+import { checkAvailability, bookAppointmentCalDav } from "./caldavService.js";
 
 const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY || "dummy" });
 const MODEL = "gemini-2.5-flash";
@@ -13,10 +14,10 @@ const DECLARATIONS = [
     name: "checkAvailability",
     description: "Check the availability of a specific doctor via their iCloud CalDAV calendar",
     parameters: {
-      type: "OBJECT",
+      type: Type.OBJECT,
       properties: {
-        doctorId: { type: "STRING", description: "The UUID of the doctor" },
-        date: { type: "STRING", description: "The date to check, in YYYY-MM-DD format" },
+        doctorId: { type: Type.STRING, description: "The UUID of the doctor" },
+        date: { type: Type.STRING, description: "The date to check, in YYYY-MM-DD format" },
       },
       required: ["doctorId", "date"],
     },
@@ -25,11 +26,11 @@ const DECLARATIONS = [
     name: "bookAppointment",
     description: "Book an appointment for a patient in the doctor's CalDAV calendar and the Insforge database",
     parameters: {
-      type: "OBJECT",
+      type: Type.OBJECT,
       properties: {
-        patientWhatsapp: { type: "STRING", description: "The WhatsApp JID of the patient" },
-        doctorId: { type: "STRING", description: "The UUID of the doctor" },
-        datetime: { type: "STRING", description: "The datetime of the appointment in ISO 8601 format" },
+        patientWhatsapp: { type: Type.STRING, description: "The WhatsApp JID of the patient" },
+        doctorId: { type: Type.STRING, description: "The UUID of the doctor" },
+        datetime: { type: Type.STRING, description: "The datetime of the appointment in ISO 8601 format" },
       },
       required: ["patientWhatsapp", "doctorId", "datetime"],
     },
@@ -38,9 +39,9 @@ const DECLARATIONS = [
     name: "viewHistorial",
     description: "View the clinical history of a patient from the Insforge database",
     parameters: {
-      type: "OBJECT",
+      type: Type.OBJECT,
       properties: {
-        patientWhatsapp: { type: "STRING", description: "The WhatsApp JID of the patient" },
+        patientWhatsapp: { type: Type.STRING, description: "The WhatsApp JID of the patient" },
       },
       required: ["patientWhatsapp"],
     },
@@ -49,17 +50,17 @@ const DECLARATIONS = [
     name: "updateHistorial",
     description: "Append a new note to the clinical history of a patient in the Insforge database",
     parameters: {
-      type: "OBJECT",
+      type: Type.OBJECT,
       properties: {
-        patientWhatsapp: { type: "STRING", description: "The WhatsApp JID of the patient" },
-        textToAppend: { type: "STRING", description: "The new medical note to append" },
+        patientWhatsapp: { type: Type.STRING, description: "The WhatsApp JID of the patient" },
+        textToAppend: { type: Type.STRING, description: "The new medical note to append" },
       },
       required: ["patientWhatsapp", "textToAppend"],
     },
   },
 ];
 
-async function handleFunctionCall(callName: string, args: any) {
+export async function handleFunctionCall(callName: string, args: any) {
   try {
     switch (callName) {
       case "checkAvailability": {

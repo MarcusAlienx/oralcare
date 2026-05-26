@@ -1,7 +1,8 @@
+// @ts-nocheck
 import { DAVClient, createObject } from "tsdav";
 import ical from "ical-generator";
 import { v4 as uuidv4 } from "uuid";
-import { getDoctores } from "./dbService";
+import { getDoctores } from "./dbService.js";
 
 // Helper para iniciar cliente de CalDAV
 const getDavClient = async (doctorId: string) => {

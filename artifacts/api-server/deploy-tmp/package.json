@@ -1,0 +1,10 @@
+{
+  "name": "oralcare-api",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "echo 'Skipping build, using bundled dist'",
+    "start": "node --enable-source-maps ./dist/index.mjs"
+  },
+  "dependencies": {}
+}

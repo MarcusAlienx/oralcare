@@ -28,6 +28,11 @@ if (!basePath) {
 
 export default defineConfig({
   base: basePath,
+  server: {
+    proxy: {
+      '/api': 'http://localhost:8080'
+    }
+  },
   plugins: [
     react(),
     tailwindcss(),

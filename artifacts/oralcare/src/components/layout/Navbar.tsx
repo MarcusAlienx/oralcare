@@ -16,22 +16,15 @@ export function Navbar() {
   });
 
   const navLinks = [
-    { name: t("nav.home"), href: "#inicio" },
-    { name: t("nav.about"), href: "#nosotros" },
-    { name: t("nav.services"), href: "#servicios" },
-    { name: t("nav.team"), href: "#equipo" },
-    { name: t("nav.testimonials"), href: "#testimonios" },
-    { name: t("nav.contact"), href: "#contacto" },
+    { name: t("nav.home"), href: "#inicio", isScroll: true },
+    { name: t("nav.about"), href: "#nosotros", isScroll: true },
+    { name: t("nav.services"), href: "#servicios", isScroll: true },
+    { name: t("nav.team"), href: "#equipo", isScroll: true },
+    { name: t("nav.testimonials"), href: "#testimonios", isScroll: true },
+    { name: t("nav.contact"), href: "#contacto", isScroll: true },
   ];
 
-  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault();
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-      setMobileMenuOpen(false);
-    }
-  };
+  const tourismLink = { name: "Medical Tourism", href: "/turismo", isScroll: false };
 
   return (
     <motion.header
@@ -61,12 +54,18 @@ export function Navbar() {
                 <a
                   key={link.name}
                   href={link.href}
-                  onClick={(e) => scrollToSection(e, link.href)}
+                  onClick={(e) => link.isScroll ? scrollToSection(e, link.href) : undefined}
                   className="text-sm font-medium transition-colors text-slate-800 hover:text-primary"
                 >
                   {link.name}
                 </a>
               ))}
+              <Link 
+                href={tourismLink.href} 
+                className="text-sm font-medium transition-colors text-primary hover:text-blue-700 font-bold"
+              >
+                {tourismLink.name}
+              </Link>
             </div>
 
             <div className="flex items-center gap-4 border-l border-slate-300/30 pl-6">
@@ -115,13 +114,18 @@ export function Navbar() {
             <a
               key={link.name}
               href={link.href}
-              onClick={(e) => scrollToSection(e, link.href)}
+              onClick={(e) => link.isScroll ? scrollToSection(e, link.href) : undefined}
               className="text-base font-medium text-slate-700 p-2 hover:bg-slate-50 rounded-md"
             >
               {link.name}
             </a>
           ))}
-          <div className="pt-4 border-t border-slate-100 flex flex-wrap gap-2">
+          <Link 
+            href={tourismLink.href} 
+            className="text-base font-medium text-primary p-2 hover:bg-slate-50 rounded-md"
+          >
+            {tourismLink.name}
+          </Link>          <div className="pt-4 border-t border-slate-100 flex flex-wrap gap-2">
             {(["es", "en"] as const).map((lang) => (
               <button
                 key={lang}
