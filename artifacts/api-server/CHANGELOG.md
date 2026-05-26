@@ -26,3 +26,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Deployment Notes
 - **InsForge Deployment Challenges**: Encountered persistent issues with the `npx @insforge/cli deployments deploy` command, specifically `Error: Command "npm install" exited with 1` and `Error: Invalid token`, despite thorough local dependency management and explicit API key provision. This suggests a potential interaction issue with the InsForge CLI within the workspace environment, which could not be resolved from code modifications alone.
+- **Frontend Deployment Challenges**: Further challenges encountered when deploying the frontend, including persistent 'vite build' attempts by InsForge despite minimalist `package.json` and explicit `vercel.json` configurations for static site deployment. This points to a deeper integration issue between the InsForge CLI's build pipeline and a pre-built static frontend within a complex monorepo structure.
