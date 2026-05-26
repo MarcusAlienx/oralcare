@@ -6,17 +6,16 @@ import { CreateLeadBody, UpdateLeadStatusBody, UpdateLeadStatusParams } from "@w
 
 const router = Router();
 
-router.get("/leads", async (req, res) => {
+router.get("/leads", async (req, res, next) => {
   try {
     const all = await db.select().from(leads).orderBy(leads.createdAt);
     res.json(all.reverse());
   } catch (err) {
-    req.log.error({ err }, "Failed to list leads");
-    res.status(500).json({ error: "Internal server error" });
+    next(err);
   }
 });
 
-router.post("/leads", async (req, res) => {
+router.post("/leads", async (req, res, next) => {
   try {
     const body = CreateLeadBody.parse(req.body);
     const [created] = await db
@@ -32,12 +31,11 @@ router.post("/leads", async (req, res) => {
       .returning();
     res.status(201).json(created);
   } catch (err) {
-    req.log.error({ err }, "Failed to create lead");
-    res.status(500).json({ error: "Internal server error" });
+    next(err);
   }
 });
 
-router.patch("/leads/:id", async (req, res) => {
+router.patch("/leads/:id", async (req, res, next) => {
   try {
     const id = Number(req.params.id);
     const body = UpdateLeadStatusBody.parse(req.body);
@@ -47,13 +45,11 @@ router.patch("/leads/:id", async (req, res) => {
       .where(eq(leads.id, id))
       .returning();
     if (!updated) {
-      res.status(404).json({ error: "Lead not found" });
-      return;
+      return res.status(404).json({ error: "Lead not found" });
     }
     res.json(updated);
   } catch (err) {
-    req.log.error({ err }, "Failed to update lead status");
-    res.status(500).json({ error: "Internal server error" });
+    next(err);
   }
 });
 

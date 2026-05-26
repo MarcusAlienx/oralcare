@@ -8,7 +8,7 @@ import crmRouter from "./crm";
 const router: IRouter = Router();
 
 router.use(healthRouter);
-router.use("/openai", openaiRouter);
+router.use("/gemini", openaiRouter);
 router.use(leadsRouter);
 router.use(adminRouter);
 router.use("/crm", crmRouter);

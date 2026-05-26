@@ -16,28 +16,26 @@ const router = Router();
 const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY || "dummy" });
 const MODEL = "gemini-2.0-flash"; // Using a stable flash model
 
-router.get("/conversations", async (req, res) => {
+router.get("/conversations", async (req, res, next) => {
   try {
     const all = await db.select().from(conversations).orderBy(conversations.createdAt);
     res.json(all);
   } catch (err) {
-    req.log.error({ err }, "Failed to list conversations");
-    res.status(500).json({ error: "Internal server error" });
+    next(err);
   }
 });
 
-router.post("/conversations", async (req, res) => {
+router.post("/conversations", async (req, res, next) => {
   try {
     const body = CreateOpenaiConversationBody.parse(req.body);
     const [created] = await db.insert(conversations).values({ title: body.title }).returning();
     res.status(201).json(created);
   } catch (err) {
-    req.log.error({ err }, "Failed to create conversation");
-    res.status(500).json({ error: "Internal server error" });
+    next(err);
   }
 });
 
-router.post("/conversations/:id/messages", async (req, res) => {
+router.post("/conversations/:id/messages", async (req, res, next) => {
   try {
     const { id } = SendOpenaiMessageParams.parse({ id: Number(req.params.id) });
     const body = SendOpenaiMessageBody.parse(req.body);
@@ -73,8 +71,7 @@ router.post("/conversations/:id/messages", async (req, res) => {
     res.write(`data: ${JSON.stringify({ done: true })}\n\n`);
     res.end();
   } catch (err) {
-    req.log.error({ err }, "Failed to send message");
-    if (!res.headersSent) res.status(500).json({ error: "Internal server error" });
+    next(err);
   }
 });
 

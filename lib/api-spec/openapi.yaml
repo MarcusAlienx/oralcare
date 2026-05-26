@@ -31,8 +31,8 @@ paths:
 
   /gemini/conversations:
     get:
-      operationId: listOpenaiConversations
-      tags: [openai]
+      operationId: listGeminiConversations
+      tags: [gemini]
       summary: List all conversations
       responses:
         "200":
@@ -44,8 +44,8 @@ paths:
                 items:
                   $ref: "#/components/schemas/GeminiConversation"
     post:
-      operationId: createOpenaiConversation
-      tags: [openai]
+      operationId: createGeminiConversation
+      tags: [gemini]
       summary: Create a new conversation
       requestBody:
         required: true
@@ -59,12 +59,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/OpenaiConversation"
+                $ref: "#/components/schemas/GeminiConversation"
 
   /gemini/conversations/{id}:
     get:
-      operationId: getOpenaiConversation
-      tags: [openai]
+      operationId: getGeminiConversation
+      tags: [gemini]
       summary: Get conversation with messages
       parameters:
         - name: id
@@ -78,16 +78,16 @@ paths:
           content:
             application/json:
               schema:
-                  $ref: "#/components/schemas/GeminiConversationWithMessages"
+                $ref: "#/components/schemas/GeminiConversationWithMessages"
         "404":
           description: Not found
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/OpenaiError"
+                $ref: "#/components/schemas/GeminiError"
     delete:
-      operationId: deleteOpenaiConversation
-      tags: [openai]
+      operationId: deleteGeminiConversation
+      tags: [gemini]
       summary: Delete a conversation
       parameters:
         - name: id
@@ -103,12 +103,12 @@ paths:
           content:
             application/json:
               schema:
-$ref: "#/components/schemas/GeminiError"
+                $ref: "#/components/schemas/GeminiError"
 
   /gemini/conversations/{id}/messages:
     get:
-      operationId: listOpenaiMessages
-      tags: [openai]
+      operationId: listGeminiMessages
+      tags: [gemini]
       summary: List messages in a conversation
       parameters:
         - name: id
@@ -126,8 +126,8 @@ $ref: "#/components/schemas/GeminiError"
                 items:
                   $ref: "#/components/schemas/GeminiMessage"
     post:
-      operationId: sendOpenaiMessage
-      tags: [openai]
+      operationId: sendGeminiMessage
+      tags: [gemini]
       summary: Send a text message and receive a streaming text response
       parameters:
         - name: id

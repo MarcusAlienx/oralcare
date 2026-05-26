@@ -26,6 +26,15 @@ export function Navbar() {
 
   const tourismLink = { name: "Medical Tourism", href: "/turismo", isScroll: false };
 
+  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    const element = document.querySelector(href);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+    setMobileMenuOpen(false);
+  };
+
   return (
     <motion.header
       initial={{ y: -100 }}
@@ -62,7 +71,7 @@ export function Navbar() {
               ))}
               <Link 
                 href={tourismLink.href} 
-                className="text-sm font-medium transition-colors text-primary hover:text-blue-700 font-bold"
+                className="text-sm transition-colors text-primary hover:text-blue-700 font-bold"
               >
                 {tourismLink.name}
               </Link>
@@ -93,7 +102,7 @@ export function Navbar() {
               <Button asChild variant="default" className="relative overflow-hidden group">
                 <a href="#contacto" onClick={(e) => scrollToSection(e, "#contacto")}> 
                   <span className="relative z-10">{t("nav.schedule")}</span>
-                  <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/30 to-transparent group-hover:animate-[shimmer_1.5s_infinite]" />
+                  <div className="absolute inset-0 -translate-x-full bg-linear-to-r from-transparent via-white/30 to-transparent group-hover:animate-[shimmer_1.5s_infinite]" />
                 </a>
               </Button>
             </div>

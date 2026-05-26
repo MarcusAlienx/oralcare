@@ -1,0 +1,20 @@
+{
+  "capabilities": {
+    "read": [
+      "./artifacts/**",
+      "./lib/**",
+      "./.agents/**",
+      "./.husky/**",
+      "./package.json",
+      "./pnpm-workspace.yaml",
+      "./README.md"
+    ],
+    "write": [
+      "./artifacts/**",
+      "./lib/**",
+      "./.agents/**",
+      "./.husky/**",
+      "./README.md"
+    ]
+  }
+}

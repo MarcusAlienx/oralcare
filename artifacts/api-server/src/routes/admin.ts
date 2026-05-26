@@ -6,7 +6,7 @@ import { TrackVisitBody } from "@workspace/api-zod";
 
 const router = Router();
 
-router.get("/admin/stats", async (req, res) => {
+router.get("/admin/stats", async (req, res, next) => {
   try {
     const todayStart = new Date();
     todayStart.setHours(0, 0, 0, 0);
@@ -68,12 +68,11 @@ router.get("/admin/stats", async (req, res) => {
       visitsLast7Days: visitRows.map(r => ({ date: r.date, count: Number(r.count) })),
     });
   } catch (err) {
-    req.log.error({ err }, "Failed to get admin stats");
-    res.status(500).json({ error: "Internal server error" });
+    next(err);
   }
 });
 
-router.post("/admin/track-visit", async (req, res) => {
+router.post("/admin/track-visit", async (req, res, next) => {
   try {
     const body = TrackVisitBody.parse(req.body);
     await db.insert(pageVisits).values({
@@ -83,8 +82,7 @@ router.post("/admin/track-visit", async (req, res) => {
     });
     res.json({ ok: true });
   } catch (err) {
-    req.log.error({ err }, "Failed to track visit");
-    res.json({ ok: false });
+    next(err);
   }
 });
 
