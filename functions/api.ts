@@ -197,16 +197,6 @@ export default async function (req: Request): Promise<Response> {
     }
 
     if (segments[0] === "openai") {
-      // Debugging helper: call /api?route=debug/db to test DB connectivity and return error details
-      if (segments[1] === "debug" && segments[2] === "db") {
-        try {
-          const { data, error } = await client.database.from("conversations").select().limit(1);
-          if (error) throw error;
-          return new Response(JSON.stringify({ ok: true, rows: data ?? [] }), { status: 200, headers: jsonHeaders });
-        } catch (err: any) {
-          return new Response(JSON.stringify({ ok: false, error: err?.message ?? String(err) }), { status: 500, headers: jsonHeaders });
-        }
-      }
       if (segments[1] === "conversations") {
         const conversationId = segments[2] ? Number(segments[2]) : null;
         const isMessagesRoute = segments[3] === "messages";
