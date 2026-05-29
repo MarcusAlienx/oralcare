@@ -1,3 +1,4 @@
+import { requireAdminAuth } from "../middleware/auth";
 import { Router } from "express";
 import { db } from "@workspace/db";
 import { leads, pageVisits, conversations } from "@workspace/db";
@@ -6,7 +7,7 @@ import { TrackVisitBody } from "@workspace/api-zod";
 
 const router = Router();
 
-router.get("/admin/stats", async (req, res, next) => {
+router.get("/admin/stats", requireAdminAuth, async (req, res, next) => {
   try {
     const todayStart = new Date();
     todayStart.setHours(0, 0, 0, 0);
