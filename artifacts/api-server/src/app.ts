@@ -14,7 +14,7 @@ const app: Express = express();
 const openApiFilePath = path.resolve(process.cwd(), "../../lib/api-spec/openapi.yaml");
 let swaggerDocument: any;
 try {
-  const fileContents = await fs.promises.readFile(openApiFilePath, "utf8");
+  const fileContents = fs.readFileSync(openApiFilePath, "utf8");
   swaggerDocument = yaml.load(fileContents);
 } catch (e) {
   logger.error("Failed to load OpenAPI spec", e);
