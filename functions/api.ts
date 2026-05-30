@@ -534,12 +534,13 @@ async function handlePatients(req: Request, segments: string[], method: string):
 
   if (patientId && method === "PATCH") {
     const body = await req.json();
-    const { data, error } = await client.database.from("patients").update({
-      name: body.name,
-      email: body.email ?? null,
-      phone: body.phone,
-      notes: body.notes ?? null,
-    }).eq("id", patientId).select();
+    const updateData: Record<string, any> = {};
+    if (body.name !== undefined) updateData.name = body.name;
+    if (body.email !== undefined) updateData.email = body.email;
+    if (body.phone !== undefined) updateData.phone = body.phone;
+    if (body.notes !== undefined) updateData.notes = body.notes;
+
+    const { data, error } = await client.database.from("patients").update(updateData).eq("id", patientId).select();
     if (error) throw error;
     if (!data?.length) return createError(404, "Patient not found");
     return new Response(JSON.stringify(data[0]), { status: 200, headers: jsonHeaders });
