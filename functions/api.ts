@@ -582,12 +582,13 @@ async function handleAppointments(req: Request, segments: string[], method: stri
 
   if (appointmentId && method === "PATCH") {
     const body = await req.json();
-    const { data, error } = await client.database.from("appointments").update({
-      service: body.service ?? null,
-      scheduled_at: body.scheduledAt ?? null,
-      status: body.status ?? null,
-      notes: body.notes ?? null,
-    }).eq("id", appointmentId).select();
+    const updateData: Record<string, any> = {};
+    if (body.service !== undefined) updateData.service = body.service;
+    if (body.scheduledAt !== undefined) updateData.scheduled_at = body.scheduledAt;
+    if (body.status !== undefined) updateData.status = body.status;
+    if (body.notes !== undefined) updateData.notes = body.notes;
+
+    const { data, error } = await client.database.from("appointments").update(updateData).eq("id", appointmentId).select();
     if (error) throw error;
     if (!data?.length) return createError(404, "Appointment not found");
     return new Response(JSON.stringify(data[0]), { status: 200, headers: jsonHeaders });
