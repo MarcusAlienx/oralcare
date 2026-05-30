@@ -5,8 +5,8 @@ import path from "path";
 import fs from "fs";
 import yaml from "js-yaml";
 import swaggerUi from "swagger-ui-express";
-import router from "./routes";
-import { logger } from "./lib/logger";
+import router from "./routes/index.js";
+import { logger } from "./lib/logger.js";
 
 const app: Express = express();
 
@@ -14,7 +14,7 @@ const app: Express = express();
 const openApiFilePath = path.resolve(process.cwd(), "../../lib/api-spec/openapi.yaml");
 let swaggerDocument: any;
 try {
-  const fileContents = fs.readFileSync(openApiFilePath, "utf8");
+  const fileContents = await fs.promises.readFile(openApiFilePath, "utf8");
   swaggerDocument = yaml.load(fileContents);
 } catch (e) {
   logger.error("Failed to load OpenAPI spec", e);
