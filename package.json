@@ -13,6 +13,7 @@
     "@types/node": "catalog:",
     "husky": "^9.1.7",
     "prettier": "^3.8.1",
-    "typescript": "~5.9.2"
+    "typescript": "~5.9.2",
+    "vitest": "^4.1.7"
   }
 }
