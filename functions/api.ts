@@ -208,19 +208,22 @@ async function handleOpenAI(req: Request, segments: string[], method: string): P
       return new Response(JSON.stringify(data ?? []), { status: 200, headers: jsonHeaders });
     }
 
-    if (!conversationId && segments.length === 2 && method === "POST") {
-      const body = await req.json();
-      if (!body?.title) {
-        return createError(400, "title is required");
-      }
-      try {
-        const { data, error } = await client.database.from("conversations").insert([{ title: body.title }]).select();
-        if (error) throw error;
-        return new Response(JSON.stringify(data?.[0] ?? null), { status: 201, headers: jsonHeaders });
-      } catch (insertErr) {
-        // Fallback: try direct PostgREST insert using API_KEY if available
-        const RAW_API_KEY = Deno.env.get("API_KEY") || Deno.env.get("INSFORGE_API_KEY");
-        if (RAW_API_KEY) {
+    if (segments[0] === "openai") {
+      if (segments[1] === "conversations") {
+        const conversationId = segments[2] ? Number(segments[2]) : null;
+        const isMessagesRoute = segments[3] === "messages";
+
+        if (!conversationId && segments.length === 2 && method === "GET") {
+          const { data, error } = await client.database.from("conversations").select();
+          if (error) throw error;
+          return new Response(JSON.stringify(data ?? []), { status: 200, headers: jsonHeaders });
+        }
+
+        if (!conversationId && segments.length === 2 && method === "POST") {
+          const body = await req.json();
+          if (!body?.title) {
+            return createError(400, "title is required");
+          }
           try {
             const postgrestUrl = INSFORGE_BASE_URL.replace(/\/$/, "") + "/rest/v1/conversations";
             const r = await fetch(postgrestUrl, {
