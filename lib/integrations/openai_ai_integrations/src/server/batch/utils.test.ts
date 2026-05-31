@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { isRateLimitError } from "./utils.ts";
+import { isRateLimitError } from "./utils";
 
 describe("isRateLimitError", () => {
   it("returns true for errors containing '429'", () => {
