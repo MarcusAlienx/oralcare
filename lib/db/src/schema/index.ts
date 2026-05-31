@@ -8,3 +8,4 @@ export * from "./pacientes";
 export * from "./leadsTurismo";
 export * from "./doctores";
 export * from "./citas";
+export * from "./users";

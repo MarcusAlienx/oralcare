@@ -167,7 +167,7 @@ export default function Admin() {
       <div className="min-h-screen bg-slate-50 flex items-center justify-center p-6">
         <Card className="w-full max-w-lg">
           <CardHeader>
-            <CardTitle>Acceso admin</CardTitle>
+            <CardTitle>Acceso Doctores</CardTitle>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleLogin} className="space-y-4">

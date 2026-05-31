@@ -50,6 +50,11 @@ Thumbs.db
 
 # Local environment files
 .env
+.env*
+.env.local
+node_modules
+dist
+.next
 
 # InsForge & AI agent skills
 .insforge

@@ -1,0 +1,17 @@
+# Excluir dependencias
+node_modules/
+.pnpm-store/
+.pnpm-debug.log
+
+# Excluir cachés y logs
+.next/
+dist/
+.output/
+.vercel/
+*.log
+
+# Excluir configuraciones de sistema y locales
+.env*
+.DS_Store
+.git/
+.vscode/

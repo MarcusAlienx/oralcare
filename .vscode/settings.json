@@ -1,3 +1,12 @@
 {
-    "continue.enableConsole": true
+    "continue.enableConsole": true,
+    "yaml.schemas": {
+        "file:///home/alien/.vscode/extensions/continue.continue-1.2.22-linux-x64/config-yaml-schema.json": [
+            ".continue/**/*.yaml"
+        ],
+        "file:///home/alien/.vscode/extensions/continue.continue-1.3.38-linux-x64/config-yaml-schema.json": [
+            ".continue/**/*.yaml",
+            "file:///home/alien/.continue/config.yaml"
+        ]
+    }
 }
