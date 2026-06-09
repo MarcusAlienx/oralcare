@@ -1,0 +1,7 @@
+{
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/api/:path*", "destination": "https://api-server-7d9dd28c-be95-45c9-b2eb-95717b2959bd.fly.dev/api/:path*" },
+    { "source": "/((?!js-css-core/|images/|api/|favicon.svg|favicon.ico).*)", "destination": "/index.html" }
+  ]
+}

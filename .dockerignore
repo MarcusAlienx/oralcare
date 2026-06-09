@@ -1,0 +1,15 @@
+.git
+.husky
+.venv_gfr
+artifacts/oralcare
+artifacts/mockup-sandbox
+scripts
+attached_assets
+final-dist
+final-hope
+pure-static-site
+graphify-out
+*.log
+.env
+node_modules
+**/node_modules

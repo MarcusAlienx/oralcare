@@ -8,6 +8,7 @@ allowBuilds:
   '@google/genai': set this to true or false
   '@scarf/scarf': true
   '@whiskeysockets/baileys': set this to true or false
+  esbuild: set this to true or false
   protobufjs: set this to true or false
 
 autoInstallPeers: false
@@ -46,6 +47,9 @@ onlyBuiltDependencies:
   - esbuild
   - msw
   - unrs-resolver
+  - '@google/genai'
+  - '@whiskeysockets/baileys'
+  - protobufjs
 
 overrides:
   '@esbuild-kit/esm-loader': npm:tsx@^4.21.0

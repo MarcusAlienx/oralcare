@@ -15,14 +15,20 @@ if (Number.isNaN(port) || port <= 0) {
   throw new Error(`Invalid PORT value: "${rawPort}"`);
 }
 
-app.listen(port, (err) => {
+app.listen(port, async (err) => {
   if (err) {
     logger.error({ err }, "Error listening on port");
     process.exit(1);
   }
 
   logger.info({ port }, "Server listening");
-});
 
-import { connectToWhatsApp } from "./services/whatsappService.js";
-connectToWhatsApp().catch(err => logger.error({ err }, "WhatsApp connection failed"));
+  // Connect to WhatsApp after server is ready
+  try {
+    const { connectToWhatsApp } = await import("./services/whatsappService.js");
+    await connectToWhatsApp();
+    logger.info({}, "WhatsApp connected");
+  } catch (err) {
+    logger.error({ err }, "WhatsApp connection failed");
+  }
+});

@@ -1,33 +1,32 @@
-import { createRequire } from "node:module";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { build as esbuild } from "esbuild";
-import esbuildPluginPino from "esbuild-plugin-pino";
 import { rm } from "node:fs/promises";
-import fs from "node:fs";
-import { builtinModules } from "node:module";
-
-// Plugins (e.g. 'esbuild-plugin-pino') may use `require` to resolve dependencies
-globalThis.require = createRequire(import.meta.url);
 
 const artifactDir = path.dirname(fileURLToPath(import.meta.url));
+
+const workspaceRoot = path.resolve(artifactDir);
 
 async function buildAll() {
   const distDir = path.resolve(artifactDir, "dist");
   await rm(distDir, { recursive: true, force: true });
 
   await esbuild({
-    entryPoints: [path.resolve(artifactDir, "src/index.ts")],
+    entryPoints: [path.resolve(artifactDir, "artifacts/api-server/src/index.ts")],
     platform: "node",
     bundle: true,
     format: "esm",
     outdir: distDir,
     outExtension: { ".js": ".mjs" },
     logLevel: "info",
-    plugins: [esbuildPluginPino({ transports: ["pino-pretty"] })],
+    alias: {
+      "@workspace/db": path.join(workspaceRoot, "lib/db/src/index.ts"),
+      "@workspace/api-zod": path.join(workspaceRoot, "lib/api-zod/src/index.ts"),
+      "@workspace/api-client-react": path.join(workspaceRoot, "lib/api-client-react/src/index.ts"),
+      "@workspace/integrations-openai-ai-server": path.join(workspaceRoot, "lib/integrations-openai-ai-server/src/index.ts"),
+      "@workspace/integrations-openai-ai-react": path.join(workspaceRoot, "lib/integrations-openai-ai-react/src/index.ts"),
+    },
     external: [
-      ...builtinModules,
-      ...builtinModules.map((m) => `node:${m}`),
       "*.node",
       "sharp",
       "better-sqlite3",

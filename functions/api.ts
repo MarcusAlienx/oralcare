@@ -229,10 +229,10 @@ async function handleOpenAI(req: Request, segments: string[], method: string): P
             const r = await fetch(postgrestUrl, {
               method: "POST",
               headers: {
-                "Content-Type": "application/json",
-                apikey: RAW_API_KEY,
-                Authorization: `Bearer ${RAW_API_KEY}`,
-              },
+                    "Content-Type": "application/json",
+                    apikey: INSFORGE_SERVICE_KEY,
+                    Authorization: `Bearer ${INSFORGE_SERVICE_KEY}`,
+                  },
               body: JSON.stringify([{ title: body.title }]),
             });
             if (!r.ok) {

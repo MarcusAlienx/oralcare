@@ -68,7 +68,7 @@ export default function Admin() {
         "Content-Type": "application/json",
         ...authHeaders,
       });
-      const res = await fetch("/functions?route=api/patients", {
+      const res = await fetch("/api/patients", {
         headers,
       });
       if (!res.ok) {
@@ -87,7 +87,7 @@ export default function Admin() {
         "Content-Type": "application/json",
         ...authHeaders,
       });
-      const res = await fetch("/functions?route=api/appointments", {
+      const res = await fetch("/api/appointments", {
         headers,
       });
       if (!res.ok) {
@@ -115,7 +115,7 @@ export default function Admin() {
     setLoginError(null);
 
     try {
-      const response = await fetch("/functions?route=api/auth/login", {
+      const response = await fetch("/api/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
