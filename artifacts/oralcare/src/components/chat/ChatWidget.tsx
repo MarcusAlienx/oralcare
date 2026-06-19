@@ -32,7 +32,7 @@ export function ChatWidget() {
 
   useEffect(() => {
     if (history && history.length > 0) {
-      const formatted = history.map(h => ({
+      const formatted = history.map((h: { id: number; role: string; content: string; conversationId: number; createdAt: string }) => ({
         id: String(h.id),
         role: h.role as "user" | "assistant",
         content: h.content

@@ -206,7 +206,7 @@ export default function Admin() {
     return <div className="min-h-screen flex items-center justify-center bg-slate-50"><Activity className="w-8 h-8 animate-spin text-primary" /></div>;
   }
 
-  const maxVisits = stats?.visitsLast7Days?.reduce((max, d) => Math.max(max, d.count), 1) || 1;
+  const maxVisits = stats?.visitsLast7Days?.reduce((max: number, d: { date: string; count: number }) => Math.max(max, d.count), 1) || 1;
 
   return (
     <div className="min-h-screen bg-slate-50 p-6 md:p-10">
@@ -285,7 +285,7 @@ export default function Admin() {
             </CardHeader>
             <CardContent>
               <div className="h-[200px] flex items-end gap-2 pt-4">
-                {stats?.visitsLast7Days?.map((day, i) => (
+                {stats?.visitsLast7Days?.map((day: { date: string; count: number }, i: number) => (
                   <div key={i} className="flex-1 flex flex-col items-center gap-2 group">
                     <div 
                       className="w-full bg-primary/20 rounded-t-sm group-hover:bg-primary transition-colors relative"
@@ -321,7 +321,7 @@ export default function Admin() {
                     </tr>
                   </thead>
                   <tbody>
-                    {leads?.map((lead) => (
+                    {leads?.map((lead: { id: number; name: string; email?: string | null; phone: string; service?: string | null; message?: string | null; notes?: string | null; status: string; createdAt: string }) => (
                       <tr key={lead.id} className="border-b border-slate-100 hover:bg-slate-50/50">
                         <td className="px-4 py-4">
                           <div className="font-medium text-slate-900">{lead.name}</div>
