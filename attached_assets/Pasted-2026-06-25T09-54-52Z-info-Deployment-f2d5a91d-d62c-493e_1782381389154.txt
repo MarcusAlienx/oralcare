@@ -1,0 +1,123 @@
+2026-06-25T09:54:52Z info: Deployment: f2d5a91d-d62c-493e-b316-e2063cf87d45
+2026-06-25T09:54:52Z info: Build: 5d649f47-8d9a-4b69-96e4-f802e31a32bf
+2026-06-25T09:54:52Z info: Running Security Scan
+2026-06-25T09:54:54Z info: Installing packages
+--> pnpm install
+
+Scope: all 11 workspace projects
+
+Lockfile is up to date, resolution step is skipped
+
+
+   ╭─────────────────────────────────────────╮
+   │                                         │
+   │   Update available! 10.26.1 → 11.9.0.   │
+   │   Changelog: https://pnpm.io/v/11.9.0   │
+   │    To update, run: pnpm add -g pnpm     │
+   │                                         │
+   ╰─────────────────────────────────────────╯
+
+
+Already up to date
+
+. prepare$ husky
+
+. prepare: Done
+
+╭ Warning ─────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│   Ignored build scripts: @google/genai@2.6.0,                                │
+│   @whiskeysockets/baileys@7.0.0-rc13, protobufjs@7.6.1.                      │
+│   Run "pnpm approve-builds" to pick which dependencies should be allowed     │
+│   to run scripts.                                                            │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+Done in 3.1s using pnpm v10.26.1
+
+2026-06-25T09:54:58Z info: Starting Build
+Scope: all 11 workspace projects
+
+Lockfile is up to date, resolution step is skipped
+
+Already up to date
+
+. prepare$ husky
+
+. prepare: Done
+
+╭ Warning ─────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│   Ignored build scripts: @google/genai@2.6.0,                                │
+│   @whiskeysockets/baileys@7.0.0-rc13, protobufjs@7.6.1.                      │
+│   Run "pnpm approve-builds" to pick which dependencies should be allowed     │
+│   to run scripts.                                                            │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+Done in 1.3s using pnpm v10.26.1
+
+
+> workspace@0.0.0 typecheck:libs /home/runner/workspace
+> tsc --build --force
+
+
+Building api-server as CJS bundle...
+
+
+  artifacts/api-server/index.cjs  4.8mb ⚠️
+
+⚡ Done in 780ms
+
+Build complete: /home/runner/workspace/artifacts/api-server/index.cjs (ESM wrapper: /home/runner/workspace/artifacts/api-server/index.mjs )
+
+
+> oralcare-frontend@1.0.0 build /home/runner/workspace/artifacts/oralcare
+> tsc && vite build
+
+
+vite v7.3.2 building client environment for production...
+
+transforming...
+
+src/components/ui/tooltip.tsx (2:0): Error when using sourcemap for reporting an error: Can't resolve original location of error.
+
+src/components/ui/select.tsx (2:0): Error when using sourcemap for reporting an error: Can't resolve original location of error.
+
+✓ 3063 modules transformed.
+
+rendering chunks...
+
+computing gzip size...
+
+dist/public/index.html                  48.71 kB │ gzip:  15.66 kB
+
+dist/public/assets/index-D6csU1Go.css  118.38 kB │ gzip:  19.20 kB
+dist/public/assets/index-BuNtm0d8.js   952.63 kB │ gzip: 260.87 kB
+✓ built in 8.13s
+
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+
+
+> @workspace/api-server@1.0.0 build /home/runner/workspace/artifacts/api-server
+> echo 'Pre-built'
+
+
+Pre-built
+
+No projects matched the filters in "/home/runner/workspace"
+
+2026-06-25T09:55:24Z info: Pushing pid1 binary layer...
+2026-06-25T09:55:25Z info: Pushing Repl layer...
+2026-06-25T09:55:25Z info: Pushing hosting layer...
+2026-06-25T09:55:25Z info: Created pid1 binary layer
+2026-06-25T09:55:25Z info: Created hosting layer
+2026-06-25T09:55:33Z info: Security Scan Complete
+2026-06-25T09:55:42Z info: Created Repl layer
+2026-06-25T09:55:44Z info: Pushed image manifest
+2026-06-25T09:55:44Z info: Skipping container streaming artifacts (SOCI/ZTOC) for non-reserved-VM deployment
+2026-06-25T09:55:47Z info: Creating Autoscale service
