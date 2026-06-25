@@ -14,10 +14,5 @@
       "@/*": ["./src/*"],
       "@workspace/*": ["../../lib/*/src"]
     }
-  },
-  "references": [
-    {
-      "path": "../../lib/api-client-react"
-    }
-  ]
+  }
 }
