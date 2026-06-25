@@ -71,5 +71,5 @@ externalPort = 8081
 
 [deployment]
 deploymentTarget = "autoscale"
-run = ["bash", "-c", "cd artifacts/api-server && NODE_ENV=production PORT=5000 node ./index.mjs"]
+run = ["bash", "-c", "cd artifacts/api-server && NODE_ENV=production node ./index.mjs"]
 build = ["bash", "-c", "pnpm install --frozen-lockfile && pnpm run typecheck:libs && node scripts/build-api.cjs && cd artifacts/oralcare && pnpm run build"]

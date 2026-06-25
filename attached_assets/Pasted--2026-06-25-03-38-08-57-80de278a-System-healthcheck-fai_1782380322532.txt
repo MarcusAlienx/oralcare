@@ -1,0 +1,186 @@
+
+2026-06-25 03:38:08.57
+80de278a
+System
+healthcheck failed error=healthcheck /api returned status 500
+
+2026-06-25 03:38:10.50
+80de278a
+System
+healthcheck failed error=healthcheck /api returned status 500
+
+2026-06-25 03:38:10.91
+80de278a
+System
+healthcheck failed error=healthcheck /api returned status 500
+
+2026-06-25 03:38:11.25
+80de278a
+System
+healthcheck failed error=healthcheck /api returned status 500
+
+2026-06-25 03:38:12.43
+80de278a
+System
+healthcheck failed error=healthcheck /api returned status 500
+
+2026-06-25 03:38:13.11
+80de278a
+System
+healthcheck failed error=healthcheck /api returned status 500
+
+2026-06-25 03:38:14.70
+80de278a
+System
+healthcheck failed error=healthcheck /api returned status 500
+
+2026-06-25 03:38:16.35
+80de278a
+System
+healthcheck failed error=healthcheck /api returned status 500
+
+2026-06-25 03:38:16.58
+80de278a
+System
+healthcheck failed error=healthcheck /api returned status 500
+
+2026-06-25 03:38:17.77
+80de278a
+System
+healthcheck failed error=healthcheck /api returned status 500
+
+2026-06-25 03:38:18.96
+80de278a
+System
+healthcheck failed error=healthcheck /api returned status 500
+
+2026-06-25 03:38:18.97
+80de278a
+System
+healthcheck failed error=healthcheck /api returned status 500
+
+2026-06-25 03:38:19.43
+80de278a
+System
+healthcheck failed error=healthcheck /api returned status 500
+
+2026-06-25 03:38:21.16
+80de278a
+System
+healthcheck failed error=healthcheck /api returned status 500
+
+2026-06-25 03:38:22.26
+80de278a
+System
+healthcheck failed error=healthcheck /api returned status 500
+
+2026-06-25 03:38:23.27
+80de278a
+System
+healthcheck failed error=healthcheck /api returned status 500
+
+2026-06-25 03:38:23.52
+80de278a
+System
+healthcheck failed error=healthcheck /api returned status 500
+
+2026-06-25 03:38:23.78
+80de278a
+System
+healthcheck failed error=healthcheck /api returned status 500
+
+2026-06-25 03:38:24.65
+80de278a
+System
+healthcheck failed error=healthcheck /api returned status 500
+
+2026-06-25 03:38:25.14
+80de278a
+System
+healthcheck failed error=healthcheck /api returned status 500
+
+2026-06-25 03:38:25.98
+80de278a
+System
+healthcheck failed error=healthcheck /api returned status 500
+
+2026-06-25 03:38:27.97
+80de278a
+System
+healthcheck failed error=healthcheck /api returned status 500
+
+2026-06-25 03:38:28.33
+80de278a
+System
+healthcheck failed error=healthcheck /api returned status 500
+
+2026-06-25 03:38:30.20
+80de278a
+System
+healthcheck failed error=healthcheck /api returned status 500
+
+2026-06-25 03:38:30.92
+80de278a
+System
+healthcheck failed error=healthcheck /api returned status 500
+
+2026-06-25 03:38:31.15
+80de278a
+System
+healthcheck failed error=healthcheck /api returned status 500
+
+2026-06-25 03:38:32.83
+80de278a
+System
+healthcheck failed error=healthcheck /api returned status 500
+
+2026-06-25 03:38:33.61
+80de278a
+System
+healthcheck failed error=healthcheck /api returned status 500
+
+2026-06-25 03:38:33.65
+80de278a
+System
+healthcheck failed error=healthcheck /api returned status 500
+
+2026-06-25 03:38:33.95
+80de278a
+System
+healthcheck failed error=healthcheck /api returned status 500
+
+2026-06-25 03:38:35.19
+80de278a
+System
+seccomp port detection incomplete, trying /proc/net/tcp fallback expected=[8080] seccompDetected=0
+
+2026-06-25 03:38:35.19
+80de278a
+System
+sending SIGTERM to artifact process artifact=artifacts/api-server
+
+2026-06-25 03:38:35.19
+80de278a
+System
+all artifact processes stopped
+
+2026-06-25 03:38:35.19
+80de278a
+System
+a port configuration was specified but the required port was never opened
+
+2026-06-25 03:38:35.19
+80de278a
+System
+not all artifact ports opened within timeout expected=[8080] detected=0
+
+
+2026-06-25 03:38:35.85
+80de278a
+System
+healthcheck failed error=healthcheck /api returned status 500
+
+2026-06-25 03:38:36.19
+80de278a
+System
+healthcheck failed error=healthcheck /api returned status 500
