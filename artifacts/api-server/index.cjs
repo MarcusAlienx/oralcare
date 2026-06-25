@@ -118984,7 +118984,9 @@ var routes_default = router6;
 
 // artifacts/api-server/src/app.ts
 var app = (0, import_express7.default)();
-var openApiFilePath = import_path.default.resolve(process.cwd(), "../../lib/api-spec/openapi.yaml");
+var serverDir = import_path.default.dirname(import_path.default.resolve(process.argv[1]));
+var workspaceRoot = import_path.default.resolve(serverDir, "../..");
+var openApiFilePath = import_path.default.join(workspaceRoot, "lib/api-spec/openapi.yaml");
 var swaggerDocument;
 try {
   const fileContents = import_fs2.default.readFileSync(openApiFilePath, "utf8");
@@ -118997,16 +118999,10 @@ app.use(
     logger,
     serializers: {
       req(req) {
-        return {
-          id: req.id,
-          method: req.method,
-          url: req.url?.split("?")[0]
-        };
+        return { id: req.id, method: req.method, url: req.url?.split("?")[0] };
       },
       res(res) {
-        return {
-          statusCode: res.statusCode
-        };
+        return { statusCode: res.statusCode };
       }
     }
   })
@@ -119018,6 +119014,14 @@ if (swaggerDocument) {
   app.use("/api/docs", import_swagger_ui_express.default.serve, import_swagger_ui_express.default.setup(swaggerDocument));
 }
 app.use("/api", routes_default);
+var frontendDist = import_path.default.join(workspaceRoot, "artifacts/oralcare/dist/public");
+if (process.env.NODE_ENV === "production" && import_fs2.default.existsSync(frontendDist)) {
+  logger.info({ frontendDist }, "Serving frontend static files");
+  app.use(import_express7.default.static(frontendDist));
+  app.get("/{*path}", (_req, res) => {
+    res.sendFile(import_path.default.join(frontendDist, "index.html"));
+  });
+}
 app.use((err, req, res, _next) => {
   const status = err.status || err.statusCode || 500;
   const message = err.message || "Internal Server Error";
